@@ -3,7 +3,7 @@ on: push
 jobs:
   Test:
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+    container: golang:latest
     steps:
       - name: my-step1
         uses: actions/checkout@v2
