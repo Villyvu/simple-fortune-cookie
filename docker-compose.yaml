@@ -1,0 +1,35 @@
+---
+version: "3"
+
+networks:
+    backend:
+    frontend:
+
+services:
+    frontend:
+        container_name: frontend
+        image: vivu19/fortune-frontend:latest
+        ports:
+            - "8080:8080"
+        networks:
+            - backend
+        environment:
+            - BACKEND_DNS=backend
+    backend:
+        container_name: backend
+        image: vivu19/fortune-backend:latest
+        ports:
+            - "9000:9000"
+        networks:
+            - frontend
+            - backend
+        environment:
+            - REDIS_DNS=redis
+    redis:
+        container_name: db
+        image: "redis:alpine"
+        networks: 
+            - backend
+        ports: 
+            - "6379:6379"
+        
